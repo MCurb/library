@@ -1,20 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Library</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <script src="javascript.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
+      <div class="top-form">
+        <form class="book-form">
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="title-input"
+            placeholder="book title"
+          />
+          <input
+            type="text"
+            id="author"
+            name="author"
+            class="author-input"
+            placeholder="author name"
+          />
+          <div>
+            <label for="range">Number of pages</label>
+            <input type="range" id="range" class="range-input" />
+            <output class="page-number"></output>
+          </div>
+          <select name="" class="select-input">
+            <option value="Essential">Essential</option>
+            <option value="Valuable">Valuable</option>
+            <option value="Optional">Optional</option>
+          </select>
+          <textarea
+            name=""
+            id=""
+            class="textarea-input"
+            placeholder="Why to read this?"
+          ></textarea>
 
+          <select name="" class="select-status" id="status">
+            <option value="Read">Read</option>
+            <option value="Not Read">Not Read</option>
+          </select>
+          <button type="submit" class="form-button">Add book</button>
+        </form>
+      </div>
+      <div class="main-content">
+        <table class="books-table">
+          <tr>
+            <th>Book Title</th>
+            <th>Author</th>
+            <th>Pages</th>
+            <th>Importance</th>
+            <th>Note</th>
+            <th>Status</th>
+            <th>delete</th>
+          </tr>
+          <tr>
+            <td>Alter Ego Effect</td>
+            <td>Todd Herman</td>
+            <td>100</td>
+            <td>Essential</td>
+            <td>This is the book every person in this world should read</td>
+            <td>Read</td>
+            <td><button>Delete</button></td>
+          </tr>
+        </table>
+        <!-- <div class="card-container">
+          <p>Alter Ego Effect</p>
+          <p>Todd Herman</p>
+          <p>100</p>
+          <p>Essential</p>
+          <p>This is the best book all people should read</p>
+        </div> -->
+      </div>
     </div>
-    <form class="book-form">
-        <input type="text" id="name" name="name" class="title-input" placeholder="book title">
-        <input type="text" id="author" name="author" class="author-input" placeholder="author name">
-        <button type="submit" class="form-button">Add book title</button>
-    </form>
-</body>
+  </body>
 </html>
