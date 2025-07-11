@@ -1,3 +1,5 @@
+/* Modern Reset */
+
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
@@ -74,6 +76,7 @@ h6 {
   isolation: isolate;
 }
 
+
 html {
   height: 100vh;
 }
@@ -101,7 +104,6 @@ body {
   /* display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, max-content));
   gap: 20px; */
-  background-color: rgb(251, 251, 203);
 }
 
 .card-container {
@@ -125,18 +127,63 @@ body {
 }
 
 table {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 16px;
+  border-radius: 25px;
+}
+
+thead tr:first-of-type {
+  transform: translateY(-10px);
 }
 
 td,
 th {
-  border-bottom: 1px solid black;
   width: 200px;
   height: 88px;
-  padding: 10px;
+  padding: 12px;
   text-align: left;
 }
 
-tr td:last-child {
-  text-align: center;
+tbody tr {
+  background-color: #f5f7fd;
+  border-radius: 12px;
+  transition: all 0.15s ease;
+}
+
+tbody tr:hover {
+  background-color: hsl(227, 70%, 96%);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+td {
+  border-top: 1px solid #dde4f9;
+  border-bottom: 1px solid #dde4f9;
+}
+
+th {
+  font-size: 20px;
+  background-color: #e9edfb;
+  border-top: 1px solid #cfd7f6;
+  border-bottom: 1px solid #cfd7f6;
+}
+
+th:first-child {
+  border-radius: 12px 0 0 12px;
+  border-left: 1px solid #cfd7f6;
+}
+
+th:last-child {
+  border-radius: 0 12px 12px 0;
+  border-right: 1px solid #cfd7f6;
+}
+
+td:first-child {
+  border-radius: 12px 0 0 12px;
+  border-left: 1px solid #dde4f9;
+}
+
+td:last-child {
+  border-radius: 0 12px 12px 0;
+  border-right: 1px solid #dde4f9;
 }

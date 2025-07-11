@@ -13,13 +13,13 @@ function Book(title, author, pages, importance, note, status, id) {
   this.id = id;
 }
 
-const table = document.querySelector(".books-table");
+const tableBody = document.querySelector(".table-body");
 
 // Put them in the DOM
 Book.prototype.displayBook = function () {
   const newRow = document.createElement("tr");
   newRow.setAttribute("data-book-id", `${this.id}`);
-  table.appendChild(newRow);
+  tableBody.appendChild(newRow);
   const title = document.createElement("td");
   const author = document.createElement("td");
   const pages = document.createElement("td");
