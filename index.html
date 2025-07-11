@@ -6,6 +6,12 @@
     <title>My Library</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="javascript.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="container">
@@ -25,26 +31,48 @@
             class="author-input"
             placeholder="author name"
           />
-          <div>
-            <label for="range">Number of pages</label>
-            <input type="range" id="range" class="range-input" />
-            <output class="page-number"></output>
-          </div>
-          <select name="" class="select-input">
-            <option value="Essential">Essential</option>
-            <option value="Valuable">Valuable</option>
-            <option value="Optional">Optional</option>
-          </select>
+
           <textarea
             name=""
             id=""
+            rows="50"
+            cols="25"
+            maxlength="60"
             class="textarea-input"
             placeholder="Why to read this?"
           ></textarea>
 
+          <div class="pages-container">
+            <label for="range">Number of pages:</label
+            >
+            <output class="page-number"></output>
+            <input
+              type="range"
+              id="range"
+              class="range-input"
+              value="300"
+              min="1"
+              max="500"
+              step="1"
+              list="page-markers"
+            />
+          </div>
+          <datalist id="page-markers">
+            <option value="100"></option>
+            <option value="200"></option>
+            <option value="300"></option>
+            <option value="400"></option>
+            <option value="500"></option>
+          </datalist>
+          <select name="" class="select-input importance-input">
+            <option value="Essential">Essential</option>
+            <option value="Valuable">Valuable</option>
+            <option value="Optional">Optional</option>
+          </select>
+
           <select name="" class="select-status" id="status">
-            <option value="Read">Read</option>
-            <option value="Not Read">Not Read</option>
+            <option value="READ">Read</option>
+            <option value="NOT READ" selected>Not Read</option>
           </select>
           <button type="submit" class="form-button">Add book</button>
         </form>
@@ -52,36 +80,28 @@
       <div class="main-content">
         <table class="books-table">
           <thead>
-             <tr>
-            <th>Book Title</th>
-            <th>Author</th>
-            <th>Pages</th>
-            <th>Importance</th>
-            <th>Note</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
+            <tr>
+              <th>Book Title</th>
+              <th>Author</th>
+              <th>Pages</th>
+              <th>Importance</th>
+              <th>Note</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
           </thead>
-         <tbody class="table-body">
-          <tr>
-            <td>Alter Ego Effect</td>
-            <td>Todd Herman</td>
-            <td>100</td>
-            <td>Essential</td>
-            <td>This is the book every person in this world should read</td>
-            <td><button>Read</button></td>
-            <td><button>Delete</button></td>
-          </tr>
-         </tbody>
-          
+          <tbody class="table-body">
+            <tr>
+              <td>Alter Ego Effect</td>
+              <td>Todd Herman</td>
+              <td>100</td>
+              <td>Essential</td>
+              <td>This is the book every person in this world should read</td>
+              <td><button>READ</button></td>
+              <td><button>DELETE</button></td>
+            </tr>
+          </tbody>
         </table>
-        <!-- <div class="card-container">
-          <p>Alter Ego Effect</p>
-          <p>Todd Herman</p>
-          <p>100</p>
-          <p>Essential</p>
-          <p>This is the best book all people should read</p>
-        </div> -->
       </div>
     </div>
   </body>

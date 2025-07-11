@@ -31,15 +31,15 @@ Book.prototype.displayBook = function () {
   statusBtn.setAttribute("data-book-id", `${this.id}`);
 
   statusBtn.addEventListener("click", () => {
-    if (statusBtn.textContent === "Read") {
-      statusBtn.textContent = "Not read";
+    if (statusBtn.textContent === "READ") {
+      statusBtn.textContent = "NOT READ";
       for (let i = 0; i < myLibrary.length; i++) {
         if (myLibrary[i].id === statusBtn.dataset.bookId) {
           myLibrary[i].status = "Not read";
         }
       }
     } else {
-      statusBtn.textContent = "Read";
+      statusBtn.textContent = "READ";
       for (let i = 0; i < myLibrary.length; i++) {
         if (myLibrary[i].id === statusBtn.dataset.bookId) {
           myLibrary[i].status = "Read";
@@ -50,7 +50,7 @@ Book.prototype.displayBook = function () {
   statusCell.appendChild(statusBtn);
   const deleteCell = document.createElement("td");
   const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
+  deleteBtn.textContent = "DELETE";
   deleteBtn.setAttribute("data-book-id", `${this.id}`);
   deleteCell.appendChild(deleteBtn);
 
