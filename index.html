@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Library</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="icon" href="svg-icons/book_ribbon_24dp_000000_FILL0_wght400_GRAD0_opsz24.png">
+    <link
+      rel="icon"
+      href="svg-icons/book_ribbon_24dp_000000_FILL0_wght400_GRAD0_opsz24.png"
+    />
     <script src="javascript.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,7 +41,7 @@
             id=""
             rows="50"
             cols="25"
-            maxlength="60"
+            maxlength="40"
             class="textarea-input"
             placeholder="Why to read this?"
           ></textarea>
@@ -91,18 +94,40 @@
             </tr>
           </thead>
           <tbody class="table-body">
-            <tr>
+            <tr class="example-row1" data-book-id="first-row">
               <td>Alter Ego Effect</td>
               <td>Todd Herman</td>
-              <td>100</td>
+              <td>280</td>
+              <td>Valuable</td>
+              <td>Unleash the strongest version of yourself</td>
+              <td><button class="read-status-example1">READ</button></td>
+              <td><button class="delete-btn-example1" data-book-id="first-row">DELETE</button></td>
+            </tr>
+            <tr class="example-row2" data-book-id="second-row">
+              <td>Deep Work</td>
+              <td>Cal Newport</td>
+              <td>304</td>
               <td>Essential</td>
-              <td>This is the book every person in this world should read</td>
-              <td><button>READ</button></td>
-              <td><button>DELETE</button></td>
+              <td>Master focus and do what truly matters</td>
+              <td><button class="read-status-example2">READ</button></td>
+              <td><button class="delete-btn-example2" data-book-id="second-row">DELETE</button></td>
+            </tr>
+            <tr class="example-row3" data-book-id="third-row">
+              <td>Can't Hurt Me</td>
+              <td>David Goggins</td>
+              <td>364</td>
+              <td>Essential</td>
+              <td>Build unbreakable mental toughness</td>
+              <td><button class="read-status-example3">READ</button></td>
+              <td><button class="delete-btn-example3" data-book-id="third-row">DELETE</button></td>
             </tr>
           </tbody>
         </table>
       </div>
+      <footer>
+        © 2025 Marcos Curbeco
+        <span>The Odin Project</span>
+      </footer>
     </div>
   </body>
 </html>

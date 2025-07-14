@@ -138,3 +138,32 @@ pageNumber.textContent = rangeInput.value;
 rangeInput.addEventListener("input", (event) => {
   pageNumber.textContent = event.target.value;
 });
+
+const booksTable = document.querySelector(".books-table");
+const examplelementeRow1 = document.querySelector(".example-row1");
+const examplelementeRow2 = document.querySelector(".example-row2");
+const examplelementeRow3 = document.querySelector(".example-row3");
+
+booksTable.addEventListener("click", (event) => {
+  if (event.target.matches(".read-status-example1")) {
+    readUnread(event.target);
+  } else if (event.target.matches(".read-status-example2")) {
+    readUnread(event.target);
+  } else if (event.target.matches(".read-status-example3")) {
+    readUnread(event.target);
+  } else if (event.target.matches(".delete-btn-example1")) {
+    examplelementeRow1.remove();
+  } else if (event.target.matches(".delete-btn-example2")) {
+    examplelementeRow2.remove();
+  } else if (event.target.matches(".delete-btn-example3")) {
+    examplelementeRow3.remove();
+  }
+});
+
+function readUnread(readBtn) {
+  if (readBtn.textContent === "READ") {
+    readBtn.textContent = "NOT READ";
+  } else if (readBtn.textContent === "NOT READ") {
+    readBtn.textContent = "READ";
+  }
+}
