@@ -29,6 +29,7 @@ Book.prototype.displayBook = function () {
   const statusCell = document.createElement("td");
   const statusBtn = document.createElement("button");
   statusBtn.setAttribute("data-book-id", `${this.id}`);
+  statusBtn.classList.add("status-btn");
 
   statusBtn.addEventListener("click", () => {
     if (statusBtn.textContent === "READ") {
@@ -52,6 +53,7 @@ Book.prototype.displayBook = function () {
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "DELETE";
   deleteBtn.setAttribute("data-book-id", `${this.id}`);
+  deleteBtn.classList.add("delete-btn");
   deleteCell.appendChild(deleteBtn);
 
   deleteBtn.addEventListener("click", () => {
