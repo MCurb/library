@@ -86,7 +86,7 @@ body {
   background-color: #f3f4f6;
 }
 
-.container {
+.page-container {
   display: grid;
   grid-template-rows: 25% 3fr max-content;
   grid-template-areas:
@@ -105,7 +105,7 @@ body {
   padding: 32px;
 }
 
-.top-form {
+.header {
   grid-area: top-content;
   display: grid;
   place-content: center;
@@ -124,7 +124,7 @@ footer {
   box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.top-form form {
+.header form {
   display: grid;
   grid-template-columns: max-content max-content max-content max-content;
   grid-template-rows: 1fr 1fr;
@@ -160,7 +160,7 @@ textarea:focus {
   resize: none;
 }
 
-form .form-button {
+form .submit-button {
   grid-column: 4 / 5;
   font-size: 16px;
   font-weight: 200;
@@ -168,19 +168,19 @@ form .form-button {
   color: white;
 }
 
-form .form-button:hover {
+form .submit-button:hover {
   cursor: pointer;
   background-color: hsl(194, 86%, 47%);
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-.pages-container {
+.pages-number-container {
   display: grid;
   grid-template-columns: max-content max-content;
   grid-template-rows: max-content max-content;
 }
 
-.pages-container input {
+.pages-number-container input {
   grid-column: 1 / span 2;
   grid-row: 2;
 }

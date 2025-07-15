@@ -10,6 +10,7 @@
       href="svg-icons/book_ribbon_24dp_000000_FILL0_wght400_GRAD0_opsz24.png"
     />
     <script src="javascript.js" defer></script>
+    <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,35 +19,23 @@
     />
   </head>
   <body>
-    <div class="container">
-      <div class="top-form">
+    <div class="page-container">
+      <!-- HEADER -->
+      <header class="header">
+        <!-- Form -->
         <form class="book-form">
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="title-input"
-            placeholder="book title"
-          />
-          <input
-            type="text"
-            id="author"
-            name="author"
-            class="author-input"
-            placeholder="author name"
-          />
+          <input type="text" class="title-input" placeholder="book title" />
+          <input type="text" class="author-input" placeholder="author name" />
 
           <textarea
-            name=""
-            id=""
             rows="50"
             cols="25"
-            maxlength="40"
+            maxlength="60"
             class="textarea-input"
-            placeholder="Why to read this?"
+            placeholder="Why to read this book?"
           ></textarea>
 
-          <div class="pages-container">
+          <div class="pages-number-container">
             <label for="range">Number of pages:</label>
             <output class="page-number"></output>
             <input
@@ -60,6 +49,7 @@
               list="page-markers"
             />
           </div>
+
           <datalist id="page-markers">
             <option value="100"></option>
             <option value="200"></option>
@@ -67,20 +57,24 @@
             <option value="400"></option>
             <option value="500"></option>
           </datalist>
-          <select name="" class="select-input importance-input">
+
+          <select class="select-input importance-input">
             <option value="Essential">Essential</option>
             <option value="Valuable">Valuable</option>
             <option value="Optional">Optional</option>
           </select>
 
-          <select name="" class="select-status" id="status">
+          <select class="select-status">
             <option value="READ">Read</option>
             <option value="NOT READ" selected>Not Read</option>
           </select>
-          <button type="submit" class="form-button">Add book</button>
+
+          <button type="submit" class="submit-button">Add book</button>
         </form>
-      </div>
-      <div class="main-content">
+      </header>
+      <!-- MAIN -->
+      <main class="main-content">
+        <!-- Table -->
         <table class="books-table">
           <thead>
             <tr>
@@ -93,37 +87,47 @@
               <th></th>
             </tr>
           </thead>
+
           <tbody class="table-body">
-            <tr class="example-row1" data-book-id="first-row">
+            <tr class="example-row1">
               <td>Alter Ego Effect</td>
               <td>Todd Herman</td>
               <td>280</td>
               <td>Valuable</td>
               <td>Unleash the strongest version of yourself</td>
               <td><button class="read-status-example1">READ</button></td>
-              <td><button class="delete-btn-example1" data-book-id="first-row">DELETE</button></td>
+              <td>
+                <button class="delete-btn-example1">DELETE</button>
+              </td>
             </tr>
-            <tr class="example-row2" data-book-id="second-row">
+
+            <tr class="example-row2">
               <td>Deep Work</td>
               <td>Cal Newport</td>
               <td>304</td>
               <td>Essential</td>
               <td>Master focus and do what truly matters</td>
               <td><button class="read-status-example2">READ</button></td>
-              <td><button class="delete-btn-example2" data-book-id="second-row">DELETE</button></td>
+              <td>
+                <button class="delete-btn-example2">DELETE</button>
+              </td>
             </tr>
-            <tr class="example-row3" data-book-id="third-row">
+
+            <tr class="example-row3">
               <td>Can't Hurt Me</td>
               <td>David Goggins</td>
               <td>364</td>
               <td>Essential</td>
               <td>Build unbreakable mental toughness</td>
               <td><button class="read-status-example3">READ</button></td>
-              <td><button class="delete-btn-example3" data-book-id="third-row">DELETE</button></td>
+              <td>
+                <button class="delete-btn-example3">DELETE</button>
+              </td>
             </tr>
           </tbody>
         </table>
-      </div>
+      </main>
+      <!-- FOOTER -->
       <footer>
         © 2025 Marcos Curbeco
         <span>The Odin Project</span>
