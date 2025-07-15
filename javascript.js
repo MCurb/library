@@ -1,8 +1,51 @@
-const container = document.querySelector(".main-content");
-
-// Gather all book objects
+/* ================================
+   1. DATA
+================================ */
 const myLibrary = [];
 
+/* ================================
+2. DOM SELECTORS
+================================ */
+
+// Form
+const bookForm = document.querySelector(".book-form");
+
+const titleInput = document.querySelector(".title-input");
+const authorInput = document.querySelector(".author-input");
+const rangeInput = document.querySelector(".range-input");
+const selectInput = document.querySelector(".select-input");
+const textareaInput = document.querySelector(".textarea-input");
+const selectStatusInput = document.querySelector(".select-status");
+
+const pageNumber = document.querySelector(".page-number");
+
+// Table
+const bookTable = document.querySelector(".book-table");
+const tableBody = document.querySelector(".table-body");
+
+const examplelementeRow1 = document.querySelector(".example-row1");
+const examplelementeRow2 = document.querySelector(".example-row2");
+const examplelementeRow3 = document.querySelector(".example-row3");
+
+/* ================================
+3. PURE LOGIC FUNCTIONS
+================================ */
+
+// Create book objects and push them into the array
+function addBookToLibrary(title, author, pages, importance, note, status, id) {
+  myLibrary.push({
+    title: title,
+    author: author,
+    pages: pages,
+    importance: importance,
+    note: note,
+    status: status,
+    id: id,
+  });
+  createNewBook();
+}
+
+// Book Object Constructor
 function Book(title, author, pages, importance, note, status, id) {
   this.title = title;
   this.author = author;
@@ -13,24 +56,43 @@ function Book(title, author, pages, importance, note, status, id) {
   this.id = id;
 }
 
-const tableBody = document.querySelector(".table-body");
+/* ================================
+4. DOM UPDATE FUNCTIONS
+================================ */
 
-// Put them in the DOM
+// Select the last book in the array and create a new object with it
+function createNewBook() {
+  lastBook = myLibrary[myLibrary.length - 1];
+  const bookInfo = new Book(
+    lastBook.title,
+    lastBook.author,
+    lastBook.pages,
+    lastBook.importance,
+    lastBook.note,
+    lastBook.status,
+    lastBook.id
+  );
+  bookInfo.displayBook();
+}
+
+// Displays the book in the table and attaches its button logic.
 Book.prototype.displayBook = function () {
-  const newRow = document.createElement("tr");
-  newRow.setAttribute("data-book-id", `${this.id}`);
-  tableBody.appendChild(newRow);
+  // Create row cells
   const title = document.createElement("td");
   const author = document.createElement("td");
   const pages = document.createElement("td");
   const importance = document.createElement("td");
   const note = document.createElement("td");
 
+  //STATUS BUTTON:
+  // Create status cell and append status btn
   const statusCell = document.createElement("td");
   const statusBtn = document.createElement("button");
   statusBtn.setAttribute("data-book-id", `${this.id}`);
   statusBtn.classList.add("status-btn");
+  statusCell.appendChild(statusBtn);
 
+  // Read status btn logic: Toggle the read status and update the book object in the array
   statusBtn.addEventListener("click", () => {
     if (statusBtn.textContent === "READ") {
       statusBtn.textContent = "NOT READ";
@@ -48,7 +110,9 @@ Book.prototype.displayBook = function () {
       }
     }
   });
-  statusCell.appendChild(statusBtn);
+
+  //DELETE BUTTON:
+  // Create delete cell and append delete btn
   const deleteCell = document.createElement("td");
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "DELETE";
@@ -56,6 +120,7 @@ Book.prototype.displayBook = function () {
   deleteBtn.classList.add("delete-btn");
   deleteCell.appendChild(deleteBtn);
 
+  // Delete Btn logic: Remove the book row, and its book object in the array
   deleteBtn.addEventListener("click", () => {
     if (newRow.dataset.bookId === deleteBtn.dataset.bookId) {
       newRow.remove();
@@ -67,13 +132,15 @@ Book.prototype.displayBook = function () {
     }
   });
 
-  newRow.appendChild(title);
-  newRow.appendChild(author);
-  newRow.appendChild(pages);
-  newRow.appendChild(importance);
-  newRow.appendChild(note);
-  newRow.appendChild(statusCell);
-  newRow.appendChild(deleteCell);
+  // Create a new table row
+  const newRow = document.createElement("tr");
+  newRow.setAttribute("data-book-id", `${this.id}`);
+
+  // Append elements to row / Append row to table
+  newRow.append(title, author, pages, importance, note, statusCell, deleteCell);
+  tableBody.appendChild(newRow);
+
+  // Put the book object info into the created elements
   title.textContent = this.title;
   author.textContent = this.author;
   pages.textContent = this.pages;
@@ -82,46 +149,13 @@ Book.prototype.displayBook = function () {
   statusBtn.textContent = this.status;
 };
 
-// Create book objects and add them to the array
-function addBookToLibrary(title, author, pages, importance, note, status, id) {
-  myLibrary.push({
-    title: title,
-    author: author,
-    pages: pages,
-    importance: importance,
-    note: note,
-    status: status,
-    id: id,
-  });
-  displayBooks();
-}
+/* ================================
+   5. EVENT HANDLERS
+================================ */
 
-// Select the last book object from the array and create a new book object with the book constructor
-function displayBooks() {
-  lastBook = myLibrary[myLibrary.length - 1];
-  const libro = new Book(
-    lastBook.title,
-    lastBook.author,
-    lastBook.pages,
-    lastBook.importance,
-    lastBook.note,
-    lastBook.status,
-    lastBook.id
-  );
-  libro.displayBook();
-}
-
-// Take the form data to create a new book object
-const bookForm = document.querySelector(".book-form");
-const titleInput = document.querySelector(".title-input");
-const authorInput = document.querySelector(".author-input");
-const rangeInput = document.querySelector(".range-input");
-const selectInput = document.querySelector(".select-input");
-const textareaInput = document.querySelector(".textarea-input");
-const selectStatusInput = document.querySelector(".select-status");
-bookForm.addEventListener("submit", function (event) {
+// Pass form data to a function and prevent uploading it to the server
+function handleFormData(event) {
   event.preventDefault();
-
   addBookToLibrary(
     titleInput.value,
     authorInput.value,
@@ -131,41 +165,47 @@ bookForm.addEventListener("submit", function (event) {
     selectStatusInput.value,
     self.crypto.randomUUID()
   );
-  console.log(myLibrary);
-});
+}
 
-const pageNumber = document.querySelector(".page-number");
-pageNumber.textContent = rangeInput.value;
-
-rangeInput.addEventListener("input", (event) => {
-  pageNumber.textContent = event.target.value;
-});
-
-const booksTable = document.querySelector(".books-table");
-const examplelementeRow1 = document.querySelector(".example-row1");
-const examplelementeRow2 = document.querySelector(".example-row2");
-const examplelementeRow3 = document.querySelector(".example-row3");
-
-booksTable.addEventListener("click", (event) => {
+// Add logic to the buttons of the three books example
+function handleExampleDOM(event) {
+  // Read status example logic
   if (event.target.matches(".read-status-example1")) {
-    readUnread(event.target);
+    toggleReadStatus(event.target);
   } else if (event.target.matches(".read-status-example2")) {
-    readUnread(event.target);
+    toggleReadStatus(event.target);
   } else if (event.target.matches(".read-status-example3")) {
-    readUnread(event.target);
-  } else if (event.target.matches(".delete-btn-example1")) {
+    toggleReadStatus(event.target);
+  }
+  // Delete btn example logic
+  else if (event.target.matches(".delete-btn-example1")) {
     examplelementeRow1.remove();
   } else if (event.target.matches(".delete-btn-example2")) {
     examplelementeRow2.remove();
   } else if (event.target.matches(".delete-btn-example3")) {
     examplelementeRow3.remove();
   }
-});
-
-function readUnread(readBtn) {
-  if (readBtn.textContent === "READ") {
-    readBtn.textContent = "NOT READ";
-  } else if (readBtn.textContent === "NOT READ") {
-    readBtn.textContent = "READ";
-  }
 }
+
+function toggleReadStatus(button) {
+  button.textContent = button.textContent === "READ" ? "NOT READ" : "READ";
+}
+
+// Display range input value in the output element
+function handleRangeInput(event) {
+  pageNumber.textContent = event.target.value;
+}
+
+/* ================================
+   6. EVENT LISTENERS
+================================ */
+bookForm.addEventListener("submit", handleFormData);
+
+bookTable.addEventListener("click", handleExampleDOM);
+
+rangeInput.addEventListener("input", handleRangeInput);
+
+/* ===================================
+   7. INITIALIZATION
+=================================== */
+pageNumber.textContent = rangeInput.value;
