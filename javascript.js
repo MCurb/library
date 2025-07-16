@@ -20,12 +20,7 @@ const selectStatusInput = document.querySelector(".select-status");
 const pageNumber = document.querySelector(".page-number");
 
 // Table
-const bookTable = document.querySelector(".book-table");
 const tableBody = document.querySelector(".table-body");
-
-const examplelementeRow1 = document.querySelector(".example-row1");
-const examplelementeRow2 = document.querySelector(".example-row2");
-const examplelementeRow3 = document.querySelector(".example-row3");
 
 /* ================================
 3. PURE LOGIC FUNCTIONS
@@ -167,45 +162,49 @@ function handleFormData(event) {
   );
 }
 
-// Add logic to the buttons of the three books example
-function handleExampleDOM(event) {
-  // Read status example logic
-  if (event.target.matches(".read-status-example1")) {
-    toggleReadStatus(event.target);
-  } else if (event.target.matches(".read-status-example2")) {
-    toggleReadStatus(event.target);
-  } else if (event.target.matches(".read-status-example3")) {
-    toggleReadStatus(event.target);
-  }
-  // Delete btn example logic
-  else if (event.target.matches(".delete-btn-example1")) {
-    examplelementeRow1.remove();
-  } else if (event.target.matches(".delete-btn-example2")) {
-    examplelementeRow2.remove();
-  } else if (event.target.matches(".delete-btn-example3")) {
-    examplelementeRow3.remove();
-  }
-}
-
-function toggleReadStatus(button) {
-  button.textContent = button.textContent === "READ" ? "NOT READ" : "READ";
-}
-
 // Display range input value in the output element
 function handleRangeInput(event) {
   pageNumber.textContent = event.target.value;
 }
 
 /* ================================
-   6. EVENT LISTENERS
+6. EVENT LISTENERS
 ================================ */
 bookForm.addEventListener("submit", handleFormData);
-
-bookTable.addEventListener("click", handleExampleDOM);
 
 rangeInput.addEventListener("input", handleRangeInput);
 
 /* ===================================
-   7. INITIALIZATION
+7. INITIALIZATION
 =================================== */
 pageNumber.textContent = rangeInput.value;
+
+addBookToLibrary(
+  "Alter Ego Effect",
+  "Todd Herman",
+  "280",
+  "Valuable",
+  "Unleash the strongest version of yourself",
+  "READ",
+  self.crypto.randomUUID()
+);
+
+addBookToLibrary(
+  "Deep Work",
+  "Cal Newport",
+  "304",
+  "Essential",
+  "Master focus and do what truly matters",
+  "NOT READ",
+  self.crypto.randomUUID()
+);
+
+addBookToLibrary(
+  "Can't Hurt Me",
+  "David Goggins",
+  "364",
+  "Essential",
+  "Build unbreakable mental toughness",
+  "READ",
+  self.crypto.randomUUID()
+);
