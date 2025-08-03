@@ -40,15 +40,99 @@ function addBookToLibrary(title, author, pages, importance, note, status, id) {
   createNewBook();
 }
 
-// Book Object Constructor
-function Book(title, author, pages, importance, note, status, id) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.importance = importance;
-  this.note = note;
-  this.status = status;
-  this.id = id;
+// Book Class Object
+class Book {
+  constructor(title, author, pages, importance, note, status, id) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.importance = importance;
+    this.note = note;
+    this.status = status;
+    this.id = id;
+  }
+
+  // Displays the book in the table and attaches its button logic.
+  displayBook() {
+    // Create row cells
+    const title = document.createElement("td");
+    const author = document.createElement("td");
+    const pages = document.createElement("td");
+    const importance = document.createElement("td");
+    const note = document.createElement("td");
+
+    //STATUS BUTTON:
+    // Create status cell and append status btn
+    const statusCell = document.createElement("td");
+    const statusBtn = document.createElement("button");
+    statusBtn.setAttribute("data-book-id", `${this.id}`);
+    statusBtn.classList.add("status-btn");
+    statusCell.appendChild(statusBtn);
+
+    // Read status btn logic: Toggle the read status and update the book object in the array
+    statusBtn.addEventListener("click", () => {
+      if (statusBtn.textContent === "READ") {
+        statusBtn.textContent = "NOT READ";
+        for (let i = 0; i < myLibrary.length; i++) {
+          if (myLibrary[i].id === statusBtn.dataset.bookId) {
+            myLibrary[i].status = "Not read";
+          }
+        }
+      } else {
+        statusBtn.textContent = "READ";
+        for (let i = 0; i < myLibrary.length; i++) {
+          if (myLibrary[i].id === statusBtn.dataset.bookId) {
+            myLibrary[i].status = "Read";
+          }
+        }
+      }
+    });
+
+    //DELETE BUTTON:
+    // Create delete cell and append delete btn
+    const deleteCell = document.createElement("td");
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "DELETE";
+    deleteBtn.setAttribute("data-book-id", `${this.id}`);
+    deleteBtn.classList.add("delete-btn");
+    deleteCell.appendChild(deleteBtn);
+
+    // Delete Btn logic: Remove the book row, and its book object in the array
+    deleteBtn.addEventListener("click", () => {
+      if (newRow.dataset.bookId === deleteBtn.dataset.bookId) {
+        newRow.remove();
+        for (let i = 0; i < myLibrary.length; i++) {
+          if (myLibrary[i].id === deleteBtn.dataset.bookId) {
+            myLibrary.splice(i, 1);
+          }
+        }
+      }
+    });
+
+    // Create a new table row
+    const newRow = document.createElement("tr");
+    newRow.setAttribute("data-book-id", `${this.id}`);
+
+    // Append elements to row / Append row to table
+    newRow.append(
+      title,
+      author,
+      pages,
+      importance,
+      note,
+      statusCell,
+      deleteCell
+    );
+    tableBody.appendChild(newRow);
+
+    // Put the book object info into the created elements
+    title.textContent = this.title;
+    author.textContent = this.author;
+    pages.textContent = this.pages;
+    importance.textContent = this.importance;
+    note.textContent = this.note;
+    statusBtn.textContent = this.status;
+  }
 }
 
 /* ================================
@@ -69,80 +153,6 @@ function createNewBook() {
   );
   bookInfo.displayBook();
 }
-
-// Displays the book in the table and attaches its button logic.
-Book.prototype.displayBook = function () {
-  // Create row cells
-  const title = document.createElement("td");
-  const author = document.createElement("td");
-  const pages = document.createElement("td");
-  const importance = document.createElement("td");
-  const note = document.createElement("td");
-
-  //STATUS BUTTON:
-  // Create status cell and append status btn
-  const statusCell = document.createElement("td");
-  const statusBtn = document.createElement("button");
-  statusBtn.setAttribute("data-book-id", `${this.id}`);
-  statusBtn.classList.add("status-btn");
-  statusCell.appendChild(statusBtn);
-
-  // Read status btn logic: Toggle the read status and update the book object in the array
-  statusBtn.addEventListener("click", () => {
-    if (statusBtn.textContent === "READ") {
-      statusBtn.textContent = "NOT READ";
-      for (let i = 0; i < myLibrary.length; i++) {
-        if (myLibrary[i].id === statusBtn.dataset.bookId) {
-          myLibrary[i].status = "Not read";
-        }
-      }
-    } else {
-      statusBtn.textContent = "READ";
-      for (let i = 0; i < myLibrary.length; i++) {
-        if (myLibrary[i].id === statusBtn.dataset.bookId) {
-          myLibrary[i].status = "Read";
-        }
-      }
-    }
-  });
-
-  //DELETE BUTTON:
-  // Create delete cell and append delete btn
-  const deleteCell = document.createElement("td");
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "DELETE";
-  deleteBtn.setAttribute("data-book-id", `${this.id}`);
-  deleteBtn.classList.add("delete-btn");
-  deleteCell.appendChild(deleteBtn);
-
-  // Delete Btn logic: Remove the book row, and its book object in the array
-  deleteBtn.addEventListener("click", () => {
-    if (newRow.dataset.bookId === deleteBtn.dataset.bookId) {
-      newRow.remove();
-      for (let i = 0; i < myLibrary.length; i++) {
-        if (myLibrary[i].id === deleteBtn.dataset.bookId) {
-          myLibrary.splice(i, 1);
-        }
-      }
-    }
-  });
-
-  // Create a new table row
-  const newRow = document.createElement("tr");
-  newRow.setAttribute("data-book-id", `${this.id}`);
-
-  // Append elements to row / Append row to table
-  newRow.append(title, author, pages, importance, note, statusCell, deleteCell);
-  tableBody.appendChild(newRow);
-
-  // Put the book object info into the created elements
-  title.textContent = this.title;
-  author.textContent = this.author;
-  pages.textContent = this.pages;
-  importance.textContent = this.importance;
-  note.textContent = this.note;
-  statusBtn.textContent = this.status;
-};
 
 /* ================================
    5. EVENT HANDLERS
