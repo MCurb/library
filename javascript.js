@@ -16,6 +16,7 @@ const rangeInput = document.querySelector(".range-input");
 const selectInput = document.querySelector(".select-input");
 const textareaInput = document.querySelector(".textarea-input");
 const selectStatusInput = document.querySelector(".select-status");
+const submitBtn = document.querySelector(".submit-button");
 
 const pageNumber = document.querySelector(".page-number");
 
@@ -135,6 +136,14 @@ class Book {
   }
 }
 
+//Helper Function
+function clearErrorMsg() {
+  const inputElements = [titleInput, textareaInput];
+  inputElements.forEach((element) => {
+    element.setCustomValidity("");
+  });
+}
+
 /* ================================
 4. DOM UPDATE FUNCTIONS
 ================================ */
@@ -159,8 +168,8 @@ function createNewBook() {
 ================================ */
 
 // Pass form data to a function and prevent uploading it to the server
-function handleFormData(event) {
-  event.preventDefault();
+function handleFormData(e) {
+  e.preventDefault();
   addBookToLibrary(
     titleInput.value,
     authorInput.value,
@@ -177,11 +186,30 @@ function handleRangeInput(event) {
   pageNumber.textContent = event.target.value;
 }
 
+//If invalid input, show custom error message
+function validateInputValues() {
+  const inputElements = [titleInput, textareaInput];
+  inputElements.forEach((elem) => {
+    elem.setCustomValidity("");
+
+    if (elem === titleInput && elem.validity.valueMissing) {
+      elem.setCustomValidity("Book title most be filled!");
+    }
+    if (elem === textareaInput && elem.validity.valueMissing) {
+      elem.setCustomValidity("Write what you think about the book");
+    }
+
+    elem.reportValidity();
+  });
+}
+
 /* ================================
 6. EVENT LISTENERS
 ================================ */
 bookForm.addEventListener("submit", handleFormData);
-
+submitBtn.addEventListener("click", validateInputValues);
+titleInput.addEventListener("keydown", clearErrorMsg);
+textareaInput.addEventListener("keydown", clearErrorMsg);
 rangeInput.addEventListener("input", handleRangeInput);
 
 /* ===================================
